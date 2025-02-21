@@ -8,6 +8,8 @@ Route::get('/', function () {
 use App\Http\Controllers\ControllerTong;
 use App\Http\Controllers\NameController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TypecodeController;
+use App\Http\Controllers\TypeController;
 use App\Http\Controllers\Vidu2Controller;
 use App\Http\Controllers\Vidu3Controller;
 
@@ -49,8 +51,14 @@ Route::group(['prefix' => 'tutorial'], function()
 
 Route::resource('/vtc', PostController::class);
 Route::get('/vtc1', [PostController::class, 'create']);
+
 Route::get('/show', [NameController::class, 'show']);
-Route::post('/display', [NameController::class, 'displayInfor']);
+Route::post('/show', [NameController::class, 'displayInfor']);
+Route::post('/clear', function () {
+    session()->forget('users');
+    return redirect('/show');
+});
 
 
+Route::get('/covid', [TypecodeController::class, 'getData']);
 
